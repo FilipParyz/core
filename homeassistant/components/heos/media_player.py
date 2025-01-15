@@ -125,7 +125,7 @@ class HeosMediaPlayer(MediaPlayerEntity, CoordinatorEntity[HeosCoordinator]):
         self._player: HeosPlayer = player
         self._attr_unique_id = str(player.player_id)
         self._attr_device_info = DeviceInfo(
-            identifiers={(HEOS_DOMAIN, player.player_id)},
+            identifiers={(HEOS_DOMAIN, player.player_id)},  # Fix later
             manufacturer="HEOS",
             model=player.model,
             name=player.name,
@@ -160,9 +160,6 @@ class HeosMediaPlayer(MediaPlayerEntity, CoordinatorEntity[HeosCoordinator]):
         # Update state when attributes of the player change
         self.async_on_remove(self._player.add_on_player_event(self._player_update))
         await super().async_added_to_hass()
-        # Ensure group members are resolved/removed when this entity is added/removed
-        self.coordinator.async_update_listeners()
-        self.async_on_remove(self.coordinator.async_update_listeners)
 
     @callback
     def _handle_coordinator_update(self) -> None:
