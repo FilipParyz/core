@@ -58,6 +58,7 @@ PLATFORMS = [
     Platform.COVER,
     Platform.FAN,
     Platform.HUMIDIFIER,
+    Platform.DEHUMIDIFIER,
     Platform.LIGHT,
     Platform.NUMBER,
     Platform.SCENE,
